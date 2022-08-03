@@ -1,0 +1,43 @@
+/******************************************************************************
+
+Rdorigo Oropeza Estrada
+Numero mayor
+Algoritmos
+
+
+*******************************************************************************/
+
+//Hallar el numero mayor de los 3 introducidos por el teclado.
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+int x,y,z,max;
+    printf("Digite el valor de x: ");
+    scanf("%i",&x);
+    printf("Digite el valor de y ");
+    scanf("%i",&y);
+    printf("Digite el valor de z ");
+    scanf("%i",&z);
+
+    if(x>y){
+    if(x>z){
+      max=x;
+    }
+    else{
+        max=z;
+    }
+}
+    else{
+        if(y>z){
+            max=y;
+        }
+        else{
+            max=z;
+        }
+    }
+    printf("El mayor de los 3 numeros es: %i",max);
+    getch();
+    return 0;
+}
