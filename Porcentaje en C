@@ -1,0 +1,80 @@
+/******************************************************************************
+
+Rodrigo Oropeza Estrada
+
+Algortimos 
+
+
+*******************************************************************************/
+
+
+
+
+#include <stdio.h>
+
+int main(){ 
+    
+    int x,y=1,p=0,im=0,pp=0,pi=0,m=0,M=0,mc=0,T=0;
+    
+    while(y=1){
+        printf("Digite un numero entre el (2-100) presiona 0 para salir:  ");
+        scanf("%i",&x);
+        
+        if(x>=2 && x<=100){
+             T++;
+            
+            if(x%2==0){
+                p++;
+                
+                if(x<50){
+                    m++;
+                }
+                
+                else{
+                    if(x>50){
+                        M++;
+                    }
+                }    
+            }
+            else{
+                im++;
+                if(x%5==0){
+                    mc++;
+                }
+            }
+            
+        }
+        
+        else{
+            if(x==0){
+                y=0;
+                
+                printf("\nTotal: %d",T );
+                printf("\nTotal de  numeros pares: %d",p);
+                printf("\nTotal de  numeros impares multiplos de 5: %d",mc);
+                printf("\nTotal de  numeros impares: %d",im);
+                p=(p*100)/T;
+                printf("\nTotal de  porcentaje en los pares: %d",p);
+                im=(im*100)/T;
+                printf("\nTotal de  porcentaje en los impares: %d",im );
+                
+                printf("\nTotal de numeros pares  menores de 50: %d",m);
+                printf("\nTotal de numeros pares mayores de 50: %d",M);
+                if(M>2 && mc >2  ){
+                    printf("\nPositivo");
+                }else {
+                printf("\nNegativo");
+                }
+                break;
+            }
+            else{
+                printf("¿Te crees muy gracioso?\n");
+            }
+        }
+    }
+    
+    return 0;
+    
+}
+
+
