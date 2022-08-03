@@ -1,0 +1,199 @@
+/******************************************************************************
+
+Rodrigo Oropeza Estrada
+190300432
+Universidad del Caribe
+Diseño Patrones
+Examen 1er parcial
+Registro de empleados
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct
+{
+  //Se declaran las variables que usare en la estructura
+  int folio, temperatura;
+  char nombre[50], hr[20], salida [20]; 
+
+} info;
+
+//Aqui es donde se guardaran los datos del empleado
+int
+main ()
+{
+  int opcions = 0, i;
+  int folio;
+  char op;
+  info *login;
+  login = malloc (sizeof (info) * 10);
+  for (i = 0; i < 9; i++)
+    {
+      login[i].folio = 0;
+      login[i].temperatura = 0;
+      strcpy (login[i].nombre, "");
+      strcpy (login[i].hr, "");
+    }
+  i = 0;
+
+  //Aqui empieza el menu ,con un swich y un do while  
+  do
+    {
+      menu ();
+      scanf ("%d", &opcions);
+      switch (opcions)
+	{
+	  //Aqui usamos la funcion para solicitar el registro
+	case 1:
+	  Reg (login);
+	  break;
+
+	  //Vizualiza todos los empleados o uno por uno por medio de su folio
+	case 2:
+	  printf ("\na)Buscar solo un empleado\n");
+	  printf ("\nb)Vizualizar todos los empleados\n");
+	  scanf (" %c", &op);
+	  if (op == 'a')
+	    {
+	      printf ("\n\nFolio de empleado 8 digitos:\n");
+	      scanf ("%d", &folio);
+	      VerFol (login, folio);
+	    }
+	  if (op == 'b')
+	    {
+	      VisualizarTd (login);
+	    }
+	  else
+	    {
+	      printf ("\nOpcion invalida\n");
+	    }
+	  break;
+	  	  
+	  	  // Registrar hr de salida
+	
+case 3:
+	  printf ("\nRegistra salida:\n");
+	  scanf ("%d", &folio);
+	  	delete   (login, folio);
+	  i--;
+	  
+	  break;
+
+	case 4:
+	  printf ("\nGracias por usar el programa ;)\n");
+	  break;
+	default:
+	  printf ("\nERROR\n");
+	  break;
+	}
+    }
+  while (opcions != 4);
+
+  return 0;
+}
+
+void
+menu ()
+{
+  printf ("1.Registrar empleado\n");
+  printf ("2.Visualizar empleado\n");
+  printf ("3.Registrar salida\n");
+  printf ("4.Salir\n");
+  return;
+}
+
+void
+Reg (info * login)
+{
+  int i;
+  for (i = 0; i < 9; i++)
+    {
+      if (login[i].folio == 0 && login[i].temperatura == 0)
+	{
+	  printf ("\nIngrese el folio de 8 gigitos:\n ");
+	  scanf ("%d", &login[i].folio);
+	  printf ("\nNombre del empleado como se indica (Rodrigo/Oropeza/Estrada)\n ");
+	  scanf ("%s", &login[i].nombre);
+	  printf ("\nTemperatura del empleado (solo numeros grados):\n ");
+	  scanf ("%d", &login[i].temperatura);
+	  printf ("\nHora de entrada (matutino/vispertino/nocturno):\n ");
+	  scanf ("%s", &login[i].hr);
+	  return;
+	}
+    }
+}
+
+void
+VisualizarTd (info * login)
+{
+  int i = 0;
+  for (i = 0; i < 11; i++)
+    {
+      if (login[i].folio != 0 &&
+	  login[i].nombre != "" &&
+	  login[i].temperatura != 0 &&
+	  login[i].hr != "")
+
+	{
+	  printf ("Folio: %d\n", login[i].folio);
+	  printf ("Nombre: %s\n", login[i].nombre);
+	  printf ("Temperatura: %d\n", login[i].temperatura);
+	  printf ("Hora de entrada (matutino/vispertino/nocturno): %s\n", login[i].hr);
+	}
+    }
+}
+
+void
+VerFol (info * login, int folio)
+{
+  int i = 0;
+  for (i = 0; i < 9; i++)
+    {
+      if (login[i].folio == folio)
+
+
+	{
+	  printf ("Folio: %d\n", login[i].folio);
+	  printf ("Nombre: %s\n", login[i].nombre);
+	  printf ("Temperatura: %d\n", login[i].temperatura);
+	  printf ("Hora de entrada (matutino/vispertino/nocturno): %s\n", login[i].hr);
+	}
+    }
+}
+
+void
+delete (info * login, int folio)
+{
+  int i;
+  for (i = 0; i < 9; i++)
+    {
+      if (login[i].folio == folio)
+	{
+	  login[i].folio = 0;
+	  login[i].temperatura = 0;
+	  strcpy (login[i].nombre, "");
+	  strcpy (login[i].hr, "");
+	}
+    }
+}
+
+void
+Corregir (info * login, int folio)
+{
+  int i;
+  for (i = 0; i < 9; i++)
+    {
+      if (login[i].folio == folio)
+	{
+	  printf ("Nombre: ");
+	  scanf ("%s", &login[i].nombre);
+	  printf ("Temperatura: ");
+	  scanf ("%d", &login[i].temperatura);
+	  printf ("Hora de entrada: ");
+	  scanf ("%s", &login[i].hr);
+	}
+    }
+}
+
