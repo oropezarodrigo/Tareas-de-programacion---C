@@ -1,0 +1,122 @@
+/******************************************************************************
+
+Rodrigo Oropeza
+Ejercicio de autobus
+Algoritmos
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main()
+{
+    int asiento[40]={0};
+    int x, y;
+    int m;
+    int cont=0;
+float activo=0;
+float pasivo=789.50;
+int comprar_lugar()
+    {
+        do{
+        printf("\nElige el numero de asiento que desea comprar\n");
+        scanf("%d",&x);
+        if(x<=0 || x>42)
+        printf("\nAsiento Invalido.");
+        }while((x<0)||(x>42));
+        if(asiento[x-1]==0){
+            asiento[x-1]=1;
+            cont=cont+1;
+            activo=activo+pasivo;
+        printf("\nAsiento disponible\n");
+        }
+        else{
+        printf("\nAsiento no disponible\n");
+        }
+    }
+int oromex(){
+printf("bye :)");
+}
+do
+{
+    printf("\n Buen viaje :D \n");
+    printf("Elige la opcion que desee ejecutar \n");
+    printf("1.Visualizar asientos disponibles. \n");
+    printf("2.Comprar asiento. \n");
+    printf("3.Cancelar compra de asiento. \n");
+     printf("4.Realizar Corte.\n");
+    printf("5.Restablecer asientos.\n");
+    printf("6.Salir \n");
+scanf("%d", &m);
+
+   switch (m){
+case 1:
+    printf("Elegiste Visualizar asientos disponibles. \n");
+   printf("Los estados de los asientos del autobus son: LIBRE=0, VENDIDO=1\n" );
+asiento[x-1]=1;
+{
+for(x=0; x<42; x++)
+{
+if(!(x%4))
+printf("\nAsiento %d= %d",x+1,asiento[x]);
+else printf("\nAsiento %d= %d",x+1,asiento[x]);
+}
+}
+
+  
+     break;
+    case 2:
+        comprar_lugar();
+    
+    break;
+     case 3:
+      printf("Elegiste Cancelar compra de asiento \n");
+      printf("\n¿Cual asiento quieres cancelar?: " );
+scanf("%d",&y);
+if(y==1)
+break;
+else 
+if(y<=0 || y>42)
+printf("\nAsiento fuera del rango del autobus." );
+else 
+if(asiento[y-1]==1){
+asiento[y-1]=0;
+cont=cont-1;
+activo=activo-pasivo;
+printf("\nAsiento cancelado con exito" );
+}else
+printf("Asiento aun no comprado");
+{
+
+
+{
+}
+
+}
+     break;
+     case 4:
+     {
+        printf("\nSe vendieron en total de boletos: %d\n", cont);
+        printf("\nDinero de la venta de boletos $%.2f\n",activo);
+    }
+     break;
+   case 5:
+   for(x=0;x<42;x++)
+        {
+            asiento[x]=0;
+        }
+        cont=0;
+        activo=0;
+        printf("\nRestablecido con exito\n");
+        
+        break;
+        case 6:
+         oromex();
+         default:
+      printf("\nDisfrute su viaje ");
+      break;}
+      
+}
+
+while(m!=6);
+    return 0;
+}
