@@ -1,0 +1,179 @@
+/******************************************************************************
+
+Rodrigo Oropeza Estrada
+Manuel Jesus Alvarez Velazquez
+Uziel Demian Marin Flores
+
+
+Diseño de Patrones 
+Recorrido de árboles
+3er Parcial 
+
+
+*******************************************************************************/
+
+
+#include <bits/stdc++.h> //contiene la mayoria de comandos de C++
+
+using namespace std; //esto nos serivirá para usar el cin y cout
+
+/*---Estructura---*/
+typedef struct Nodo
+{
+    int x;  //almacenará los datos que ingrese el usuario
+    Nodo *ant; //para retornar al nodo anterior
+    Nodo *izq; //para navegar al lado izquierdo nodo
+    Nodo *der; //para navegar al lado derecho nodo
+} Nodo;
+
+/*---Zona de Prototipos---*/
+Nodo *CrearNodo(int elem);
+bool InsArbol(Nodo *raiz, Nodo *padre, int elem);
+void Recorrido(Nodo *raiz, int tipo);
+
+/*---Función Principal---*/
+int main()
+{
+    int eleccion;
+    int nodos; 
+    int valores;
+
+    cout << "Cuantos Nodos vas a utilizar usuario: ";
+    cin >> nodos;
+
+    Nodo *arbol = CrearNodo(nodos);
+
+    do{
+        cout << "1) INSERTAR NODO" << endl;
+        cout << "2) VISUALIZAR PREORDEN" << endl;
+        cout << "3) VISUALIZAR INORDEN" << endl;
+        cout << "4) VISUALIZAR POSORDEN" << endl;
+        cout << "5) VISUALIZAR ANCHURA" << endl;
+        cout << "6) FINALIZAR PROGRAMA" << endl;
+        cout << endl;
+
+        cout << "Seleccione una opcion: " << endl;
+        cin >> eleccion;
+
+        switch(eleccion)
+        {
+            case 1:
+                cout << "Añadir los nodos" << endl;
+                for(int i = 0; i < nodos; i++)
+                {
+                    cin >> valores;
+                    InsArbol(arbol,arbol,valores);
+                }
+                break;
+            
+            case 2:
+                cout << "VISUALIZACION EN PREORDEN" << endl;
+                Recorrido(arbol,0); 
+                break;
+            
+            case 3:
+                cout << "VISUALIZACION EN INORDEN" << endl;
+                Recorrido(arbol,1);
+                break;
+
+            case 4:
+                cout << "VISUALIZACION EN POSORDEN" << endl;
+                Recorrido(arbol,2);
+                break;
+
+            case 5:
+                cout << "No pudimos con este paso maestra :(, pero le deseamos feliz navidad maestra y feliz año :)" << endl;
+                break;
+
+            case 6:
+                break;
+
+            default:
+                break;
+        }
+    }while(eleccion != 6);
+
+}
+
+/*---Zona de Funciones---*/
+Nodo *CrearNodo(int elem)
+{
+    Nodo *newnodo = NULL; //el apuntador señalará hacia NULO
+
+    if((newnodo = new Nodo[1]) == NULL) //Es para verificar si el sistema nos brinda memoria
+    {
+        cout << "No hay memoria" << endl;
+        return NULL;
+    }
+    newnodo->x = elem; 
+    newnodo->ant = NULL;
+    newnodo->der = NULL;
+    newnodo->izq = NULL;
+    return newnodo;
+}
+
+bool InsArbol(Nodo *raiz, Nodo *padre, int elem){
+    Nodo *newnodo; //variable de tipo Nodo que nos servirá para manipular las variables de la estructura
+
+    if(raiz == NULL)
+    {
+        if((newnodo = CrearNodo(elem)) == NULL)
+        {
+            return false;
+        }
+
+        if(newnodo->x <= padre->x)
+        {
+            padre->izq = newnodo;
+        }
+        else
+        {
+            padre->der = newnodo;
+        }
+        newnodo->ant = padre;
+        return true;
+    }
+
+    if(elem <= raiz->x)
+    {
+        InsArbol(raiz->izq, raiz, elem);
+    }
+    else
+    {
+        InsArbol(raiz->der, raiz, elem);
+    }
+    return true;
+}
+
+void Recorrido(Nodo *raiz, int tipo)
+{
+    if(raiz == NULL) //verificación por si todavía no hay una raíz
+    {
+        return;
+    }
+
+    switch(tipo)
+    {
+        case 0:
+            //PREORDEN
+            cout << raiz->x << endl;
+            Recorrido(raiz->izq,0);
+            Recorrido(raiz->der,0);
+            break;
+        case 1:
+            //INORDEN
+            Recorrido(raiz->izq,1);
+            cout << raiz->x << endl;
+            Recorrido(raiz->der,1);
+            break;
+        case 2:
+            //POSORDEN
+            Recorrido(raiz->izq,2);
+            Recorrido(raiz->der,2);
+            cout << raiz->x << endl;
+            break;
+        default:
+            return;
+    }
+    return;
+}
